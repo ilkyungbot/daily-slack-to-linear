@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Label</key>
+    <string>com.claude.daily-slack-to-linear</string>
+    <key>ProgramArguments</key>
+    <array>
+        <string>/Users/gowid/.local/bin/claude</string>
+        <string>-p</string>
+        <string>/daily-slack-to-linear 완료 후 결과 요약을 Slack DM으로 나에게 꼭 보내줘. Step 8을 반드시 실행해. 확인을 요청하지 말고 바로 보내.</string>
+        <string>--allowedTools</string>
+        <string>mcp__slack__slack_send_message,mcp__slack__slack_search_public_and_private,mcp__slack__slack_search_users,mcp__linear__create_issue,mcp__linear__list_teams,mcp__linear__list_projects,Bash,Read,Write,Edit,Glob,Grep,WebFetch,WebSearch,ToolSearch</string>
+    </array>
+    <key>StartCalendarInterval</key>
+    <array>
+        <dict>
+            <key>Weekday</key><integer>1</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>2</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>3</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>4</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+        <dict>
+            <key>Weekday</key><integer>5</integer>
+            <key>Hour</key><integer>19</integer>
+            <key>Minute</key><integer>0</integer>
+        </dict>
+    </array>
+    <key>WorkingDirectory</key>
+    <string>/Users/gowid</string>
+    <key>StandardOutPath</key>
+    <string>/Users/gowid/claude-daily-slack.log</string>
+    <key>StandardErrorPath</key>
+    <string>/Users/gowid/claude-daily-slack-error.log</string>
+    <key>EnvironmentVariables</key>
+    <dict>
+        <key>PATH</key>
+        <string>/Users/gowid/.local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin</string>
+        <key>HOME</key>
+        <string>/Users/gowid</string>
+    </dict>
+</dict>
+</plist>

@@ -177,6 +177,39 @@ MCP 확인을 통과한 후 `~/.claude/daily-slack-to-linear-config.json` 파일
 총 {N}건 생성 완료.
 ```
 
+### Step 8: Slack DM 알림
+
+실행 결과를 본인에게 Slack DM으로 발송한다. `mcp__slack__slack_send_message`를 사용:
+
+- **channel**: 설정의 `slack_user_id` (DM은 user ID를 channel로 사용)
+- **text**: 아래 형식으로 작성
+
+**이슈가 생성된 경우:**
+```
+:clipboard: 슬랙 → Linear 자동 정리 완료 ({날짜})
+
+{N}건의 이슈가 생성되었습니다:
+• PLT-XXX: {제목} (우선순위, due M/DD)
+• PLT-YYY: {제목} (우선순위, due M/DD)
+
+Linear에서 확인하세요!
+```
+
+**멘션이 없거나 액션 아이템이 0건인 경우:**
+```
+:white_check_mark: 슬랙 → Linear 자동 정리 ({날짜})
+
+오늘은 액션이 필요한 멘션이 없습니다. 깔끔한 하루!
+```
+
+**에러가 발생한 경우:**
+```
+:warning: 슬랙 → Linear 자동 정리 실패 ({날짜})
+
+{에러 내용 요약}
+로그: ~/claude-daily-slack.log
+```
+
 ---
 
 ## 설정 변경
