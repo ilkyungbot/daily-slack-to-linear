@@ -7,7 +7,7 @@
 ## 동작 방식
 
 ```
-슬랙 멘션 수집 → 액션 아이템 판별 → 프로젝트 매칭 → Linear 이슈 생성 → 결과 요약
+슬랙 멘션 수집 → 액션 아이템 판별 → 프로젝트 매칭 → Linear 이슈 생성 → 결과 요약 → Slack DM 알림
 ```
 
 1. 오늘 날짜 기준 나를 멘션한 슬랙 메시지를 전체 수집
@@ -15,6 +15,7 @@
 3. 설정된 키워드와 프로젝트에 매칭
 4. Linear 이슈 자동 생성 (제목, 설명, 우선순위, Due Date 포함)
 5. 생성 결과를 테이블로 요약
+6. 실행 결과를 Slack DM으로 본인에게 알림 발송
 
 ## 사전 요구사항
 
@@ -77,6 +78,50 @@ Claude Code에서 아래 중 하나를 입력:
 
 총 3건 생성 완료.
 ```
+
+## 자동 실행 (launchd)
+
+macOS launchd를 사용하여 월~금 19시에 자동 실행할 수 있습니다.
+
+### 설정 방법
+
+1. plist 파일을 LaunchAgents에 복사:
+
+```bash
+cp com.claude.daily-slack-to-linear.plist ~/Library/LaunchAgents/
+```
+
+2. plist 파일 내 `claude` 경로를 본인 환경에 맞게 수정:
+
+```bash
+# claude 경로 확인
+which claude
+```
+
+3. launchd에 등록:
+
+```bash
+launchctl load ~/Library/LaunchAgents/com.claude.daily-slack-to-linear.plist
+```
+
+### 관리 명령어
+
+```bash
+# 즉시 실행 테스트
+launchctl start com.claude.daily-slack-to-linear
+
+# 중지
+launchctl unload ~/Library/LaunchAgents/com.claude.daily-slack-to-linear.plist
+
+# 상태 확인
+launchctl list | grep claude
+```
+
+### 참고사항
+
+- Mac이 잠자기 상태였다면, 깨어날 때 자동 실행됩니다
+- 실행 결과는 Slack DM으로 알림을 받습니다
+- 로그: `~/claude-daily-slack.log`, `~/claude-daily-slack-error.log`
 
 ## 설정 변경
 
